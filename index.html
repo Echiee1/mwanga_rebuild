@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mwanga — The Next Chapter</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0D1B6E;
+    --navy-deep: #07104A;
+    --navy-mid: #1A2FA0;
+    --navy-light: #D8DFF5;
+    --navy-pale: #F0F3FC;
+    --gold: #F5A800;
+    --gold-light: #FFF4D6;
+    --gold-dark: #C47E00;
+    --white: #FFFFFF;
+    --off-white: #F8F9FE;
+    --text-dark: #0D1B6E;
+    --text-body: #2C3560;
+    --text-muted: #6B7AB8;
+    --border: rgba(13, 27, 110, 0.12);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off-white);
+    color: var(--text-body);
+    line-height: 1.7;
+  }
+
+  .page {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 10%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page + .page {
+    border-top: 1px solid var(--border);
+  }
+
+  /* ── COVER ── */
+  .cover {
+    background: var(--navy-deep);
+    color: white;
+    padding: 100px 10%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(245,168,0,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,47,160,0.4) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .logo-mark {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 80px;
+  }
+
+  .logo-sunburst {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+  }
+
+  .logo-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.95);
+    letter-spacing: 0.05em;
+    text-transform: lowercase;
+  }
+
+  .cover-eyebrow {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+
+  .cover-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 7vw, 88px);
+    font-weight: 900;
+    line-height: 1.05;
+    color: white;
+    margin-bottom: 32px;
+    max-width: 800px;
+  }
+
+  .cover-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .cover-subtitle {
+    font-size: 18px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.65);
+    max-width: 560px;
+    line-height: 1.8;
+    margin-bottom: 64px;
+  }
+
+  .cover-meta {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .cover-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .cover-meta-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .cover-meta-value {
+    font-size: 15px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.85);
+  }
+
+  /* ── SECTION LABELS ── */
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 24px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--gold);
+  }
+
+  /* ── HEADINGS ── */
+  .page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--navy);
+    margin-bottom: 20px;
+    max-width: 720px;
+  }
+
+  .page-title em {
+    font-style: italic;
+    color: var(--navy-mid);
+  }
+
+  .page-intro {
+    font-size: 17px;
+    font-weight: 300;
+    color: var(--text-muted);
+    max-width: 640px;
+    line-height: 1.85;
+    margin-bottom: 56px;
+  }
+
+  /* ── STORY PAGE ── */
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 48px;
+  }
+
+  .story-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 36px;
+    position: relative;
+  }
+
+  .story-card::before {
+    content: attr(data-number);
+    position: absolute;
+    top: 24px; right: 28px;
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    font-weight: 900;
+    color: var(--navy-pale);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .story-card-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 12px;
+  }
+
+  .story-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 14px;
+    line-height: 1.3;
+  }
+
+  .story-card-body {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--text-body);
+  }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    position: relative;
+    margin-top: 48px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--gold), var(--navy-mid));
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 40px;
+    position: relative;
+  }
+
+  .timeline-dot {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--navy);
+    z-index: 1;
+  }
+
+  .timeline-dot.gold {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: white;
+  }
+
+  .timeline-content {
+    padding-top: 8px;
+  }
+
+  .timeline-year {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  .timeline-title {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .timeline-body {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--text-body);
+  }
+
+  /* ── THREE PILLARS ── */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+
+  .pillar {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    padding: 36px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pillar::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--gold);
+  }
+
+  .pillar:nth-child(2)::after { background: var(--navy-mid); }
+  .pillar:nth-child(3)::after { background: var(--navy); }
+
+  .pillar-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--navy-pale);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+  }
+
+  .pillar-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .pillar-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--gold-light);
+    color: var(--gold-dark);
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+  }
+
+  .pillar:nth-child(2) .pillar-tag {
+    background: var(--navy-pale);
+    color: var(--navy-mid);
+  }
+
+  .pillar:nth-child(3) .pillar-tag {
+    background: var(--navy-pale);
+    color: var(--navy);
+  }
+
+  .pillar-body {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--text-body);
+  }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-top: 48px;
+    border: 1px solid var(--border);
+  }
+
+  .stat {
+    background: white;
+    padding: 32px 28px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-number span {
+    color: var(--gold);
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* ── OPPORTUNITY ── */
+  .opp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 48px;
+  }
+
+  .opp-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+  }
+
+  .opp-card.highlight {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: white;
+  }
+
+  .opp-card.highlight .opp-title { color: white; }
+  .opp-card.highlight .opp-body { color: rgba(255,255,255,0.7); }
+  .opp-card.highlight .opp-tag { background: rgba(245,168,0,0.2); color: var(--gold); }
+
+  .opp-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--navy-pale);
+    color: var(--navy-mid);
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+  }
+
+  .opp-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .opp-body {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--text-body);
+  }
+
+  .opp-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--gold);
+    margin-top: 20px;
+    line-height: 1;
+  }
+
+  .opp-number-label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 4px;
+  }
+
+  /* ── WHAT WE'RE BUILDING ── */
+  .build-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin-top: 48px;
+  }
+
+  .build-card {
+    border-radius: 16px;
+    padding: 32px 28px;
+    position: relative;
+  }
+
+  .build-card:nth-child(1) {
+    background: var(--navy);
+    color: white;
+  }
+
+  .build-card:nth-child(2) {
+    background: var(--gold);
+    color: var(--navy-deep);
+  }
+
+  .build-card:nth-child(3) {
+    background: var(--navy-pale);
+    color: var(--navy);
+    border: 1px solid var(--border);
+  }
+
+  .build-card-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 12px;
+  }
+
+  .build-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    line-height: 1.25;
+  }
+
+  .build-card-body {
+    font-size: 14px;
+    line-height: 1.8;
+    opacity: 0.85;
+  }
+
+  .build-card-list {
+    margin-top: 16px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .build-card-list li {
+    font-size: 13px;
+    opacity: 0.8;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .build-card-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    opacity: 0.6;
+  }
+
+  /* ── 90 DAY PLAN ── */
+  .plan-phases {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 48px;
+  }
+
+  .phase {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .phase-header {
+    padding: 20px 24px;
+    background: var(--navy);
+    color: white;
+  }
+
+  .phase-header.gold { background: var(--gold); color: var(--navy-deep); }
+  .phase-header.navy-mid { background: var(--navy-mid); color: white; }
+
+  .phase-days {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.65;
+    margin-bottom: 4px;
+  }
+
+  .phase-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .phase-body {
+    padding: 24px;
+  }
+
+  .phase-actions {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .phase-actions li {
+    font-size: 14px;
+    color: var(--text-body);
+    padding-left: 20px;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .phase-actions li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--gold-dark);
+    font-weight: 500;
+  }
+
+  .phase-outcome {
+    margin-top: 20px;
+    padding: 14px 16px;
+    background: var(--navy-pale);
+    border-radius: 10px;
+    font-size: 13px;
+    color: var(--navy-mid);
+    line-height: 1.6;
+  }
+
+  /* ── WHO WE SERVE ── */
+  .serve-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 48px;
+  }
+
+  .serve-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px 28px;
+    text-align: center;
+  }
+
+  .serve-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+  }
+
+  .serve-icon.people { background: var(--gold-light); }
+  .serve-icon.business { background: var(--navy-pale); }
+  .serve-icon.community { background: #EEF7EE; }
+
+  .serve-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .serve-body {
+    font-size: 14px;
+    color: var(--text-body);
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  .serve-examples {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .serve-example {
+    font-size: 12px;
+    background: var(--off-white);
+    border-radius: 8px;
+    padding: 6px 10px;
+    color: var(--text-muted);
+  }
+
+  /* ── CLOSING ── */
+  .closing {
+    background: var(--navy-deep);
+    color: white;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 100px 10%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .closing::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(245,168,0,0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .closing-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 700;
+    line-height: 1.3;
+    color: white;
+    max-width: 780px;
+    margin-bottom: 48px;
+  }
+
+  .closing-quote em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .closing-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .cta-primary {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--navy-deep);
+    font-size: 15px;
+    font-weight: 500;
+    padding: 14px 28px;
+    border-radius: 10px;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+
+  .cta-secondary {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── DIVIDER ── */
+  .gold-line {
+    width: 48px;
+    height: 3px;
+    background: var(--gold);
+    border-radius: 2px;
+    margin-bottom: 32px;
+  }
+
+  /* ── CALLOUT BOX ── */
+  .callout {
+    background: var(--gold-light);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 12px 12px 0;
+    padding: 20px 24px;
+    margin-top: 32px;
+    font-size: 15px;
+    color: var(--navy);
+    line-height: 1.75;
+    max-width: 680px;
+  }
+
+  .callout strong {
+    color: var(--gold-dark);
+    font-weight: 500;
+  }
+
+  /* ── DARK PAGE ── */
+  .dark-page {
+    background: var(--navy);
+    color: white;
+  }
+
+  .dark-page .page-title { color: white; }
+  .dark-page .page-title em { color: var(--gold); }
+  .dark-page .page-intro { color: rgba(255,255,255,0.6); }
+  .dark-page .section-label { color: var(--gold); }
+
+  /* ── PAGE NUMBER ── */
+  .page-number {
+    position: absolute;
+    bottom: 32px;
+    right: 10%;
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+  }
+
+  .dark-page .page-number { color: rgba(255,255,255,0.3); }
+  .cover .page-number { color: rgba(255,255,255,0.2); }
+  .closing .page-number { color: rgba(255,255,255,0.2); }
+
+  /* ── HORIZONTAL RULE ── */
+  hr.light {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+  }
+
+  @media print {
+    .page, .cover, .closing { page-break-after: always; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     SLIDE 1 — COVER
+══════════════════════════════════════ -->
+<div class="cover">
+  <div class="logo-mark">
+    <svg class="logo-sunburst" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+      <!-- 8 rays of white dots -->
+      <!-- right -->
+      <circle cx="33" cy="22" r="1.8" fill="white" opacity="0.9"/>
+      <circle cx="37" cy="22" r="1.5" fill="white" opacity="0.7"/>
+      <circle cx="41" cy="22" r="1.2" fill="white" opacity="0.5"/>
+      <!-- left -->
+      <circle cx="11" cy="22" r="1.8" fill="white" opacity="0.9"/>
+      <circle cx="7" cy="22" r="1.5" fill="white" opacity="0.7"/>
+      <circle cx="3" cy="22" r="1.2" fill="white" opacity="0.5"/>
+      <!-- down -->
+      <circle cx="22" cy="33" r="1.8" fill="white" opacity="0.9"/>
+      <circle cx="22" cy="37" r="1.5" fill="white" opacity="0.7"/>
+      <circle cx="22" cy="41" r="1.2" fill="white" opacity="0.5"/>
+      <!-- up -->
+      <circle cx="22" cy="11" r="1.8" fill="white" opacity="0.9"/>
+      <circle cx="22" cy="7" r="1.5" fill="white" opacity="0.7"/>
+      <circle cx="22" cy="3" r="1.2" fill="white" opacity="0.5"/>
+      <!-- lower-right -->
+      <circle cx="30.2" cy="30.2" r="1.8" fill="white" opacity="0.9"/>
+      <circle cx="33.0" cy="33.0" r="1.5" fill="white" opacity="0.7"/>
+      <circle cx="35.8" cy="35.8" r="1.2" fill="white" opacity="0.5"/>
+      <!-- upper-left -->
+      <circle cx="13.8" cy="13.8" r="1.8" fill="white" opacity="0.9"/>
+      <circle cx="11.0" cy="11.0" r="1.5" fill="white" opacity="0.7"/>
+      <circle cx="8.2" cy="8.2" r="1.2" fill="white" opacity="0.5"/>
+      <!-- lower-left -->
+      <circle cx="13.8" cy="30.2" r="1.8" fill="white" opacity="0.9"/>
+      <circle cx="11.0" cy="33.0" r="1.5" fill="white" opacity="0.7"/>
+      <circle cx="8.2" cy="35.8" r="1.2" fill="white" opacity="0.5"/>
+      <!-- upper-right -->
+      <circle cx="30.2" cy="13.8" r="1.8" fill="white" opacity="0.9"/>
+      <circle cx="33.0" cy="11.0" r="1.5" fill="white" opacity="0.7"/>
+      <circle cx="35.8" cy="8.2" r="1.2" fill="white" opacity="0.5"/>
+      <!-- gold centre circle -->
+      <circle cx="22" cy="22" r="8" fill="#F5A800"/>
+    </svg>
+    <span class="logo-text">mwanga</span>
+  </div>
+
+  <div class="cover-eyebrow">Internal Evolution Document — Confidential</div>
+
+  <h1 class="cover-title">
+    Eight years of light.<br>
+    <em>The next chapter.</em>
+  </h1>
+
+  <p class="cover-subtitle">
+    This document is for the people building Mwanga — our leadership, advisors, and partners. It tells the truth about where we have been, names the moment we are in, and lays out what we are becoming. Built without outside capital. Sustained by conviction. Ready for what comes next.
+  </p>
+
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <span class="cover-meta-label">Company</span>
+      <span class="cover-meta-value">Mwanga</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="cover-meta-label">Founded</span>
+      <span class="cover-meta-value">Lagos, Nigeria</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="cover-meta-label">Leadership</span>
+      <span class="cover-meta-value">Solo-founded. Female-led.</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="cover-meta-label">People employed</span>
+      <span class="cover-meta-value">500+ since inception</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="cover-meta-label">Capital structure</span>
+      <span class="cover-meta-value">Bootstrapped</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="cover-meta-label">People made debt-free</span>
+      <span class="cover-meta-value">2M+</span>
+    </div>
+    <div class="cover-meta-item">
+      <span class="cover-meta-label">Companies served</span>
+      <span class="cover-meta-value">25+</span>
+    </div>
+  </div>
+
+  <div class="page-number">01</div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     SLIDE 2 — THE HONEST STORY
+══════════════════════════════════════ -->
+<div class="page" style="background: white;">
+  <div class="section-label">Where we have been</div>
+  <h2 class="page-title">We were here <em>before</em> the world arrived.</h2>
+  <p class="page-intro">
+    Mwanga entered the BPO market in Lagos before it was fashionable, before global capital arrived, before Nigeria cracked the world's top ten outsourcing destinations. We did not follow the trend. We were the trend.
+  </p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot gold">✦</div>
+      <div class="timeline-content">
+        <div class="timeline-year">Day One</div>
+        <div class="timeline-title">One founder. Female. Solo. Starts Mwanga in Lagos.</div>
+        <div class="timeline-body">No co-founder. No institutional capital. No safety net. A female founder builds an ethical debt collection company in a category dominated by aggressive, male-led operations — and leads it with a standard of professionalism and governance that global companies are only now starting to demand. Every decision from day one has been hers alone. Every risk carried by one person. That is the foundation everything else is built on.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot">2</div>
+      <div class="timeline-content">
+        <div class="timeline-year">Growth Phase</div>
+        <div class="timeline-title">Client base expands — fintechs, banks, commercial companies</div>
+        <div class="timeline-body">Mwanga became the trusted partner for Nigeria's most regulated industries. Debt collection, customer support, inbound and outbound operations. Real clients. Real revenue. Real operational infrastructure built from the ground up.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot">3</div>
+      <div class="timeline-content">
+        <div class="timeline-year">2021</div>
+        <div class="timeline-title">Yapha Academy launches — training African talent for the digital economy</div>
+        <div class="timeline-body">Mwanga started training young Africans — in telecollections, customer support, telesales, negotiation, and digital skills. Eight cohorts. Over 1,000 learners. Thirteen countries. This was not a side project. It was a signal of what Mwanga understood before others did: the talent is here. It just needs the right infrastructure.</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot gold">→</div>
+      <div class="timeline-content">
+        <div class="timeline-year">Today</div>
+        <div class="timeline-title">Eight years in — and the world has finally caught up</div>
+        <div class="timeline-body">Nigeria just entered the global top 10 outsourcing destinations for the first time. The global BPO market is heading towards $500 billion by 2030. The companies that came after us are scaling fast. And Mwanga — the pioneer — is at an inflection point. This document is about what we do next.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-number">02</div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     SLIDE 3 — THE HONEST RECKONING
+══════════════════════════════════════ -->
+<div class="page" style="background: var(--off-white);">
+  <div class="section-label">The honest reckoning</div>
+  <h2 class="page-title">We have to say what is <em>true.</em></h2>
+  <p class="page-intro">
+    We will not ask anyone to build with us on a foundation of optimism alone. Before we talk about the future, we name the present clearly.
+  </p>
+
+  <div class="story-grid" style="grid-template-columns: 1fr 1fr 1fr;">
+    <div class="story-card" data-number="01">
+      <div class="story-card-label">What is true</div>
+      <div class="story-card-title">We built something that survived</div>
+      <div class="story-card-body">Eight years. Real operations. Real clients in regulated industries. A training programme that has touched over a thousand lives across thirteen African countries. Not many BPOs — in Nigeria or anywhere — can say that. Mwanga is still standing because it was built right.</div>
+    </div>
+
+    <div class="story-card" data-number="02">
+      <div class="story-card-label">What is also true</div>
+      <div class="story-card-title">We hit a plateau</div>
+      <div class="story-card-body">The same scrappiness and founder-led intensity that built Mwanga has also become the ceiling. The structure that worked in year two does not automatically scale to year ten. We have been running the business without fully building toward the next version of it. That changes now.</div>
+    </div>
+
+    <div class="story-card" data-number="03" style="background: var(--navy); border-color: var(--navy);">
+      <div class="story-card-label" style="color: var(--gold);">The founding truth</div>
+      <div class="story-card-title" style="color: white;">Bootstrapped. From day one.</div>
+      <div class="story-card-body" style="color: rgba(255,255,255,0.75);">Every client won on merit. Every salary paid from revenue earned. Every decision made without a funding round to fall back on. While others scaled on investor capital, Mwanga built on discipline. That is not a gap in our story. That is proof that the model works — and that what comes next is built on a foundation nobody can take away.</div>
+    </div>
+
+    <div class="story-card" data-number="04">
+      <div class="story-card-label">What the market did</div>
+      <div class="story-card-title">Later entrants scaled faster</div>
+      <div class="story-card-body">Companies that entered after us — with capital, with global positioning, with technology infrastructure — have grown quickly in a market we helped build. That is not a reason for bitterness. It is a reason for clarity about what we need to do differently in the next phase.</div>
+    </div>
+
+    <div class="story-card" data-number="05">
+      <div class="story-card-label">Why this moment is different</div>
+      <div class="story-card-title">The window is open right now</div>
+      <div class="story-card-body">Nigeria entering the global top 10 is not background noise. It is the moment Mwanga has been positioned for since day one. We have eight years of credibility that no new entrant can buy. The question is whether we use this window — or watch it close.</div>
+    </div>
+
+    <div class="story-card" data-number="06" style="grid-column: span 3; background: var(--navy-pale); border-color: var(--navy-light); display: flex; flex-direction: row; gap: 48px; align-items: center;">
+      <div style="flex: 0 0 auto; text-align: center;">
+        <div style="font-family: 'Playfair Display', serif; font-size: 72px; font-weight: 900; color: var(--navy); line-height: 1;">500<span style="color: var(--gold); font-size: 48px;">+</span></div>
+        <div style="font-size: 13px; color: var(--text-muted); margin-top: 4px; letter-spacing: 0.05em;">people employed since inception</div>
+      </div>
+      <div style="flex: 1; border-left: 2px solid var(--navy-light); padding-left: 48px;">
+        <div class="story-card-label">The impact most companies never talk about</div>
+        <div class="story-card-title" style="font-size: 20px;">Mwanga was the first workplace for 80% of them.</div>
+        <div class="story-card-body">Most have moved on — to better roles, bigger companies, careers they could not have accessed without a first opportunity. That is not attrition. That is legacy. Mwanga did not just build a BPO. It built the careers of hundreds of Nigerian professionals who are now contributing across the country's fintech, banking, and corporate ecosystem. Every one of them carries a piece of Mwanga's story into the wider world. That network — invisible, unmapped, and growing — is one of Mwanga's most underutilised assets.</div>
+        <div style="margin-top: 24px; display: flex; gap: 32px; flex-wrap: wrap;">
+          <div style="text-align: center;">
+            <div style="font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; color: var(--navy); line-height: 1;">2M<span style="color: var(--gold); font-size: 24px;">+</span></div>
+            <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">people made debt-free</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; color: var(--navy); line-height: 1;">25<span style="color: var(--gold); font-size: 24px;">+</span></div>
+            <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">companies served</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; color: var(--navy); line-height: 1;">500<span style="color: var(--gold); font-size: 24px;">+</span></div>
+            <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">people employed</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; color: var(--navy); line-height: 1;">1K<span style="color: var(--gold); font-size: 24px;">+</span></div>
+            <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Yapha learners trained</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-number">03</div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     SLIDE 4 — THE NUMBERS
+══════════════════════════════════════ -->
+<div class="page dark-page">
+  <div class="section-label" style="color: var(--gold);">The market context</div>
+  <h2 class="page-title">The market <em>Mwanga</em> was built for is arriving.</h2>
+  <p class="page-intro">
+    The global outsourcing market is not slowing down. Africa's share of it is accelerating. And Nigeria — Mwanga's home — is at the centre of it.
+  </p>
+
+  <div class="stats-bar" style="border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05);">
+    <div class="stat" style="background: rgba(255,255,255,0.07);">
+      <div class="stat-number" style="color: var(--gold);">$500<span style="font-size: 24px; color: rgba(245,168,0,0.6);">B</span></div>
+      <div class="stat-label" style="color: rgba(255,255,255,0.5);">Global BPO market projected by 2030</div>
+    </div>
+    <div class="stat" style="background: rgba(255,255,255,0.07); border-left: 1px solid rgba(255,255,255,0.08);">
+      <div class="stat-number" style="color: var(--gold);">6<span style="font-size: 24px; color: rgba(245,168,0,0.6);">th</span></div>
+      <div class="stat-label" style="color: rgba(255,255,255,0.5);">Nigeria's global outsourcing rank in 2026 — first time in top 10</div>
+    </div>
+    <div class="stat" style="background: rgba(255,255,255,0.07); border-left: 1px solid rgba(255,255,255,0.08);">
+      <div class="stat-number" style="color: var(--gold);">2<span style="font-size: 24px; color: rgba(245,168,0,0.6);">%</span></div>
+      <div class="stat-label" style="color: rgba(255,255,255,0.5);">Africa's current share of the global BPO market — the gap is the opportunity</div>
+    </div>
+    <div class="stat" style="background: rgba(255,255,255,0.07); border-left: 1px solid rgba(255,255,255,0.08);">
+      <div class="stat-number" style="color: var(--gold);">53<span style="font-size: 24px; color: rgba(245,168,0,0.6);">M</span></div>
+      <div class="stat-label" style="color: rgba(255,255,255,0.5);">Nigerians aged 18–35 — the world's most motivated talent pipeline</div>
+    </div>
+    <div class="stat" style="background: rgba(255,255,255,0.07); border-left: 1px solid rgba(255,255,255,0.08);">
+      <div class="stat-number" style="color: var(--gold);">2<span style="font-size: 24px; color: rgba(245,168,0,0.6);">M+</span></div>
+      <div class="stat-label" style="color: rgba(255,255,255,0.5);">People made debt-free through Mwanga's ethical collections</div>
+    </div>
+    <div class="stat" style="background: rgba(255,255,255,0.07); border-left: 1px solid rgba(255,255,255,0.08);">
+      <div class="stat-number" style="color: var(--gold);">25<span style="font-size: 24px; color: rgba(245,168,0,0.6);">+</span></div>
+      <div class="stat-label" style="color: rgba(255,255,255,0.5);">Companies served across Nigeria and beyond
+    </div>
+  </div>
+
+  <div class="callout" style="background: rgba(245,168,0,0.1); border-left-color: var(--gold); color: rgba(255,255,255,0.85); margin-top: 40px;">
+    <strong style="color: var(--gold);">The strategic moment:</strong> Mature outsourcing markets — India and the Philippines — are experiencing wage inflation, talent saturation, and growing competition for labour. Global companies are actively looking for alternatives. Africa is the answer they are converging on. Mwanga has been in this market for eight years — bootstrapped, proven, and profitable on its own terms. The funded competitors have the capital advantage. Mwanga has the credibility advantage. In a market where trust is the deciding factor, that is the stronger asset. The window does not stay open forever.
+  </div>
+
+  <div class="page-number">04</div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     SLIDE 5 — WHAT MWANGA IS BECOMING
+══════════════════════════════════════ -->
+<div class="page" style="background: white;">
+  <div class="section-label">The evolution</div>
+  <h2 class="page-title">Mwanga is not rebranding.<br><em>It is becoming.</em></h2>
+  <p class="page-intro">
+    The name stays. The values stay. The eight years of operational credibility stays. What evolves is the structure, the ambition, and the scale of what Mwanga offers the world.
+  </p>
+
+  <div class="build-grid">
+    <div class="build-card">
+      <div class="build-card-label">Business Unit 01</div>
+      <div class="build-card-title">Mwanga Operations</div>
+      <div class="build-card-body">Africa's borderless AI-augmented operations partner for global teams. Remote-first. AI-monitored. Real-time client visibility. Staffed by vetted talent from across the continent.</div>
+      <ul class="build-card-list">
+        <li>Ethical debt & revenue recovery</li>
+        <li>Customer support & CX</li>
+        <li>Virtual assistant services</li>
+        <li>Inbound & outbound operations</li>
+        <li>Community intelligence & research</li>
+      </ul>
+    </div>
+
+    <div class="build-card">
+      <div class="build-card-label">Business Unit 02</div>
+      <div class="build-card-title">Yapha Academy</div>
+      <div class="build-card-body">The talent engine. Train, deploy, and connect Africa's next generation of digital operations professionals to global teams and institutional partners.</div>
+      <ul class="build-card-list" style="color: var(--navy-deep);">
+        <li>Structured 12-month cohort programme</li>
+        <li>Learn → intern → get placed</li>
+        <li>Internal Mwanga talent pipeline</li>
+        <li>Institutional partner placements</li>
+        <li>Sponsored cohorts for DFIs & foundations</li>
+      </ul>
+    </div>
+
+    <div class="build-card">
+      <div class="build-card-label">Business Unit 03</div>
+      <div class="build-card-title">Mwanga Intelligence</div>
+      <div class="build-card-body">Community-level insight and research delivered by people who are already embedded in the communities being studied. For governments, DFIs, and foundations who need real data, not fly-in surveys.</div>
+      <ul class="build-card-list">
+        <li>Community surveys & data collection</li>
+        <li>Ground-level insight reports</li>
+        <li>Impact measurement for partners</li>
+        <li>Strategic research for development actors</li>
+        <li>Government & foundation partnerships</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="page-number">05</div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     SLIDE 6 — WHO WE SERVE
+══════════════════════════════════════ -->
+<div class="page" style="background: var(--off-white);">
+  <div class="section-label">Who we serve</div>
+  <h2 class="page-title">People. Businesses. <em>Communities.</em></h2>
+  <p class="page-intro">
+    Mwanga is not a single-stakeholder company. Our model creates value in three directions simultaneously — and that is what makes it defensible.
+  </p>
+
+  <div class="serve-grid">
+    <div class="serve-card">
+      <div class="serve-icon people">🌟</div>
+      <div class="serve-title">People</div>
+      <div class="serve-body">We serve people by creating access to work that the traditional economy excludes them from. The woman on maternity leave. The graduate in Nairobi. The talented professional in a city with no BPO infrastructure.</div>
+      <div class="serve-examples">
+        <div class="serve-example">Remote agents working from anywhere</div>
+        <div class="serve-example">Yapha learners in 13 African countries</div>
+        <div class="serve-example">Professionals earning in hard currency</div>
+      </div>
+    </div>
+
+    <div class="serve-card">
+      <div class="serve-icon business">⚡</div>
+      <div class="serve-title">Businesses</div>
+      <div class="serve-body">We serve businesses by giving them intelligent, ethical, AI-augmented operations teams they can trust with their most sensitive customer interactions — at a fraction of the cost of local equivalents.</div>
+      <div class="serve-examples">
+        <div class="serve-example">Global fintechs & financial services</div>
+        <div class="serve-example">UK, US & Gulf SMEs needing virtual teams</div>
+        <div class="serve-example">African enterprises scaling operations</div>
+      </div>
+    </div>
+
+    <div class="serve-card">
+      <div class="serve-icon community">🌍</div>
+      <div class="serve-title">Communities</div>
+      <div class="serve-body">We serve communities by making them visible. Our distributed presence across Africa means we can gather real, ground-level data for the institutions trying to serve those communities with intention.</div>
+      <div class="serve-examples">
+        <div class="serve-example">Government policy & programme research</div>
+        <div class="serve-example">DFI & foundation impact measurement</div>
+        <div class="serve-example">Community insight for strategic partners</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>The Mwanga difference:</strong> Most BPOs serve one stakeholder — the client. Mwanga's model creates compounding value across three. The talent we develop through Yapha becomes the operations team that serves the business client. The business client's work generates the ground-level presence that enables community intelligence. Each unit strengthens the others.
+  </div>
+
+  <div class="page-number">06</div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     SLIDE 7 — THE TECHNOLOGY VISION
+══════════════════════════════════════ -->
+<div class="page dark-page">
+  <div class="section-label">The technology layer</div>
+  <h2 class="page-title">A BPO without walls needs <em>intelligent infrastructure.</em></h2>
+  <p class="page-intro">
+    The vision of a borderless, remote-first operations company is only possible with the right technology underneath it. This is what we are building toward.
+  </p>
+
+  <div class="opp-grid">
+    <div class="opp-card" style="background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.1);">
+      <div class="opp-tag" style="background: rgba(245,168,0,0.15); color: var(--gold);">Phase 1 — Now</div>
+      <div class="opp-title" style="color: white;">Integrated tools stack</div>
+      <div class="opp-body" style="color: rgba(255,255,255,0.65);">Configure best-in-class existing tools — remote monitoring, client dashboards, LMS for Yapha, CRM for operations — into a coherent Mwanga stack. Operational in 90 days. No custom build required.</div>
+    </div>
+
+    <div class="opp-card" style="background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.1);">
+      <div class="opp-tag" style="background: rgba(245,168,0,0.15); color: var(--gold);">Phase 2 — Months 4–9</div>
+      <div class="opp-title" style="color: white;">First proprietary layer</div>
+      <div class="opp-body" style="color: rgba(255,255,255,0.65);">Build the unified client dashboard and the Yapha-to-live-project connector. Agents log in, clients see real-time performance. Yapha interns work on live Mwanga client projects from within the platform.</div>
+    </div>
+
+    <div class="opp-card highlight" style="border-color: var(--gold);">
+      <div class="opp-tag">Phase 3 — Month 12+</div>
+      <div class="opp-title">The Mwanga OS</div>
+      <div class="opp-body" style="color: rgba(255,255,255,0.75);">A purpose-built smart operations platform — monitoring, reporting, talent matching, client visibility, and community intelligence data capture — in one proprietary system. This is the technology moat.</div>
+      <div class="opp-number">10x</div>
+      <div class="opp-number-label">revenue potential when the OS becomes a licensable product</div>
+    </div>
+
+    <div class="opp-card" style="background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.1); grid-column: span 1;">
+      <div class="opp-tag" style="background: rgba(245,168,0,0.15); color: var(--gold);">AI Integration</div>
+      <div class="opp-title" style="color: white;">Human + AI, not human vs AI</div>
+      <div class="opp-body" style="color: rgba(255,255,255,0.65);">AI handles first-contact interactions, compliance checking, sentiment analysis, and escalation routing. Human agents handle complexity, empathy, and relationship. Mwanga agents become the most effective financial operations specialists in the African BPO market.</div>
+    </div>
+  </div>
+
+  <div class="page-number">07</div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     SLIDE 8 — THE 90-DAY PLAN
+══════════════════════════════════════ -->
+<div class="page" style="background: white;">
+  <div class="section-label">The immediate plan</div>
+  <h2 class="page-title">90 days to a <em>different Mwanga.</em></h2>
+  <p class="page-intro">
+    Not a different company. The same Mwanga — sharper, more visible, and actively building toward global positioning. Three phases. Specific outputs. No waiting.
+  </p>
+
+  <div class="plan-phases">
+    <div class="phase">
+      <div class="phase-header gold">
+        <div class="phase-days">Days 1 – 30</div>
+        <div class="phase-name">Foundation</div>
+      </div>
+      <div class="phase-body">
+        <ul class="phase-actions">
+          <li>Finalise and lock the Mwanga brand narrative</li>
+          <li>Audit all current digital presence</li>
+          <li>Brief web designer — new site in build</li>
+          <li>Rebuild founder LinkedIn with new positioning</li>
+          <li>Identify 5 target global clients by name</li>
+          <li>Register on global BPO directories</li>
+          <li>Configure interim remote operations stack</li>
+        </ul>
+        <div class="phase-outcome">
+          By Day 30: The story is locked. The website is in build. The world can already see a different Mwanga on LinkedIn.
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-header navy-mid">
+        <div class="phase-days">Days 31 – 60</div>
+        <div class="phase-name">Market entry</div>
+      </div>
+      <div class="phase-body">
+        <ul class="phase-actions">
+          <li>New website goes live</li>
+          <li>Founder personally reaches out to 5 global prospects</li>
+          <li>First global commercial conversation scheduled</li>
+          <li>Yapha institutional outreach to 3 partners</li>
+          <li>Mwanga OS concept document completed</li>
+          <li>Founder speaks at one relevant event</li>
+          <li>Remote operations stack live and demo-ready</li>
+        </ul>
+        <div class="phase-outcome">
+          By Day 60: Mwanga looks and sounds global. At least one real commercial conversation is in progress.
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-days">Days 61 – 90</div>
+        <div class="phase-name">Close & learn</div>
+      </div>
+      <div class="phase-body">
+        <ul class="phase-actions">
+          <li>First formal proposal to a global client submitted</li>
+          <li>Yapha L&D lead onboarded</li>
+          <li>Strategic advisor identified and approached</li>
+          <li>Multi-currency payment infrastructure live</li>
+          <li>90-day learning document completed</li>
+          <li>Three 12-month goals set and shared with team</li>
+        </ul>
+        <div class="phase-outcome">
+          By Day 90: First global proposal on the table. Team aligned on the next twelve months. The next chapter has begun.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-number">08</div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     SLIDE 9 — WHAT WE ARE ASKING
+══════════════════════════════════════ -->
+<div class="page" style="background: var(--off-white);">
+  <div class="section-label">The ask</div>
+  <h2 class="page-title">What we need from <em>the people in this room.</em></h2>
+  <p class="page-intro">
+    This document is not a pitch for external investment. It is an invitation to the people closest to Mwanga — leadership, advisors, partners — to build the next chapter together. Here is what that means practically.
+  </p>
+
+  <div class="opp-grid">
+    <div class="opp-card">
+      <div class="opp-tag">For the leadership team</div>
+      <div class="opp-title">Recommit to the vision</div>
+      <div class="opp-body">The plateau was real. So is the path forward. We need everyone in a leadership role to read this document, sit with it honestly, and tell us if they are in — not out of loyalty, but out of genuine belief in what Mwanga is becoming. That honesty is more valuable than any skills.</div>
+    </div>
+
+    <div class="opp-card">
+      <div class="opp-tag">For advisors</div>
+      <div class="opp-title">Bring the wisdom we have not yet had</div>
+      <div class="opp-body">Mwanga has never had formal advisors. We are asking for one hour a month from people who have scaled services businesses through inflection points. Not consulting fees. Not equity immediately. Just honest, experienced thinking applied to real decisions.</div>
+    </div>
+
+    <div class="opp-card">
+      <div class="opp-tag">For the Yapha team</div>
+      <div class="opp-title">Own the Academy completely</div>
+      <div class="opp-body">With a dedicated L&D lead coming in, Yapha gets the focused leadership it has always deserved. The ask: build the institutional partnership pipeline alongside the cohort delivery. Yapha should be generating revenue and talent simultaneously within six months.</div>
+    </div>
+
+    <div class="opp-card">
+      <div class="opp-tag">For everyone</div>
+      <div class="opp-title">Hold the standard publicly</div>
+      <div class="opp-body">The Code of Conduct we have built, the governance framework, the positioning as a premium ethical BPO — none of it means anything if we do not live it internally first. Every person on the Mwanga team is a representative of the brand we are building.</div>
+    </div>
+  </div>
+
+  <div class="page-number">09</div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     SLIDE 10 — CLOSING
+══════════════════════════════════════ -->
+<div class="closing">
+  <div class="logo-mark">
+    <svg class="logo-sunburst" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+      <!-- 8 rays of white dots -->
+      <!-- right -->
+      <circle cx="33" cy="22" r="1.8" fill="white" opacity="0.9"/>
+      <circle cx="37" cy="22" r="1.5" fill="white" opacity="0.7"/>
+      <circle cx="41" cy="22" r="1.2" fill="white" opacity="0.5"/>
+      <!-- left -->
+      <circle cx="11" cy="22" r="1.8" fill="white" opacity="0.9"/>
+      <circle cx="7" cy="22" r="1.5" fill="white" opacity="0.7"/>
+      <circle cx="3" cy="22" r="1.2" fill="white" opacity="0.5"/>
+      <!-- down -->
+      <circle cx="22" cy="33" r="1.8" fill="white" opacity="0.9"/>
+      <circle cx="22" cy="37" r="1.5" fill="white" opacity="0.7"/>
+      <circle cx="22" cy="41" r="1.2" fill="white" opacity="0.5"/>
+      <!-- up -->
+      <circle cx="22" cy="11" r="1.8" fill="white" opacity="0.9"/>
+      <circle cx="22" cy="7" r="1.5" fill="white" opacity="0.7"/>
+      <circle cx="22" cy="3" r="1.2" fill="white" opacity="0.5"/>
+      <!-- lower-right -->
+      <circle cx="30.2" cy="30.2" r="1.8" fill="white" opacity="0.9"/>
+      <circle cx="33.0" cy="33.0" r="1.5" fill="white" opacity="0.7"/>
+      <circle cx="35.8" cy="35.8" r="1.2" fill="white" opacity="0.5"/>
+      <!-- upper-left -->
+      <circle cx="13.8" cy="13.8" r="1.8" fill="white" opacity="0.9"/>
+      <circle cx="11.0" cy="11.0" r="1.5" fill="white" opacity="0.7"/>
+      <circle cx="8.2" cy="8.2" r="1.2" fill="white" opacity="0.5"/>
+      <!-- lower-left -->
+      <circle cx="13.8" cy="30.2" r="1.8" fill="white" opacity="0.9"/>
+      <circle cx="11.0" cy="33.0" r="1.5" fill="white" opacity="0.7"/>
+      <circle cx="8.2" cy="35.8" r="1.2" fill="white" opacity="0.5"/>
+      <!-- upper-right -->
+      <circle cx="30.2" cy="13.8" r="1.8" fill="white" opacity="0.9"/>
+      <circle cx="33.0" cy="11.0" r="1.5" fill="white" opacity="0.7"/>
+      <circle cx="35.8" cy="8.2" r="1.2" fill="white" opacity="0.5"/>
+      <!-- gold centre circle -->
+      <circle cx="22" cy="22" r="8" fill="#F5A800"/>
+    </svg>
+    <span class="logo-text">mwanga</span>
+  </div>
+
+  <p class="closing-quote">
+    "One founder. No capital. No map.<br>
+    Just the conviction that African talent<br>
+    deserved better infrastructure —<br>
+    <em>and the discipline to build it.</em>"
+  </p>
+
+  <div style="width: 48px; height: 3px; background: var(--gold); border-radius: 2px; margin-bottom: 32px;"></div>
+
+  <p style="font-size: 16px; color: rgba(255,255,255,0.55); max-width: 600px; line-height: 1.9; margin-bottom: 48px;">
+    Mwanga means light. A female founder built it from nothing, employed over five hundred people, launched the careers of hundreds who had never worked before, and kept the lights on for eight years without asking anyone for money. That is the foundation. Now we build the next chapter on top of it — for people, for businesses, and for communities across Africa and the world.
+  </p>
+
+  <div class="closing-cta">
+    <span class="cta-primary">Confidential — For Internal Distribution Only</span>
+    <span class="cta-secondary">Mwanga Evolution Deck · Version 1.0 · 2025</span>
+  </div>
+
+  <div class="page-number">10</div>
+</div>
+
+</body>
+</html>
